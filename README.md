@@ -1,31 +1,27 @@
 ## Technical assessment
 
-The assessment solution is based on the original `Gilded Rose Refactoring Kata` and cloned from https://github.com/emilybache/GildedRose-Refactoring-Kata. Since the solution is provided for Java only, all redundant packages were removed from the development branch. The original README.md is available in the `main` branch.
+The assessment solution is based on the original `Gilded Rose Refactoring Kata` and was cloned from https://github.com/emilybache/GildedRose-Refactoring-Kata. As the submission is Java-only, non-Java content was removed on the development branch. The original code base and README.md are on the `main` branch.
 
 ## How to use the repository
 
-Repository branching model follows standard Git Flow model:
-- `main` branch - stores the original code (production-ready).
-- `develop` branch - contains technical assessment changes. This is the target branch for the review. For convenience, this branch is the default in the GitHub repo.
-- `feat/*` branches - short-lived branches for small batches of feature related changes. Created from the `develop` branch and merged to the `develop` branch only.
+#### 1. Structure
 
-## Text-Based Approval Testing
+The assessment is organized in three main steps:
+- [Problem statement](docs/problemStatement.md)
+- [Solution designs](docs/solutionDesigns.md)
+- [Execution plan of the refactoring](docs/executionPlan.md)
 
-For information about approval testing, see the [texttests README](texttests/README.md).
+Implementation and unit tests live under `Java/src/main/java` and `Java/src/test/java` respectively.
 
-### Gilded Rose Requirements in other languages
+#### 2. Branching model
 
-- [English](GildedRoseRequirements.md)
-- [Español](GildedRoseRequirements_es.md)
-- [Français](GildedRoseRequirements_fr.md)
-- [Italiano](GildedRoseRequirements_it.md)
-- [日本語](GildedRoseRequirements_jp.md)
-- [Português](GildedRoseRequirements_pt-BR.md)
-- [Русский](GildedRoseRequirements_ru.md)
-- [Українська](GildedRoseRequirements_ua.md)
-- [ไทย](GildedRoseRequirements_th.md)
-- [中文](GildedRoseRequirements_zh.txt)
-- [한국어](GildedRoseRequirements_kr.md)
-- [German](GildedRoseRequirements_de.md)
-- [Euskara](GildedRoseRequirements_eu.md)
-- [Galego](GildedRoseRequirements_gl.md)
+Branching follows Git Flow:
+- `main` — original upstream kata (unchanged).
+- `develop` — assessment work; this is the branch to review. It is the default branch on GitHub.
+- `feat/*` — short-lived branches for small changes, branched from and merged back into `develop` only.
+
+Commits follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+
+#### 3. Testing
+
+How to run tests is described in the [Java README](Java/README.md).
