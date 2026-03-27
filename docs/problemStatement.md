@@ -4,7 +4,7 @@ This explains why the original Java code should be refactored. Starting points a
 - `GildedRose#updateQuality` method.
 - `GildedRoseTest` test class.
 - `Item` class.
-- requirements from the [GildedRoseRequirements.md](GildedRoseRequirements.md)
+- requirements from the [GildedRoseRequirements.md](../GildedRoseRequirements.md)
 
 Problems found are grouped into the following categories:
 
