@@ -26,4 +26,25 @@ class GildedRoseTest {
         void qualityMaximumValueIsFifty() {
         }
     }
+
+    @Nested
+    @DisplayName("Aged Brie suite")
+    class AgedBrie {
+
+        @Test
+        void qualityIncreasesEachDayBeforeSellByDate() {
+        }
+
+        @Test
+        void qualityIncreasesEachDayAfterSellByDate() {
+        }
+
+        @Test
+        void qualityMaximumValueIsFifty() {
+        }
+
+        @Test
+        void qualityIsFiftyWhenStartingAtFortyNineAfterSellByDate() {
+        }
+    }
 }
