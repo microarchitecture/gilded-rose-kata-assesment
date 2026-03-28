@@ -89,4 +89,25 @@ class GildedRoseTest {
         void qualityMaximumValueIsEighty() {
         }
     }
+
+    @Nested
+    @DisplayName("Conjured item suite")
+    class ConjuredItem {
+
+        @Test
+        void qualityDegradesTwoTimesFasterThanNormalBeforeSellBy() {
+        }
+
+        @Test
+        void qualityDegradesTwoTimesFasterThanNormalAfterSellBy() {
+        }
+
+        @Test
+        void qualityMinimumValueIsZero() {
+        }
+
+        @Test
+        void qualityMaximumValueIsFifty() {
+        }
+    }
 }
