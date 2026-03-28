@@ -40,11 +40,36 @@ class GildedRoseTest {
         }
 
         @Test
-        void qualityMaximumValueIsFifty() {
+        void qualityIsFiftyWhenStartingAtFortyNineAfterSellByDate() {
         }
 
         @Test
-        void qualityIsFiftyWhenStartingAtFortyNineAfterSellByDate() {
+        void qualityMaximumValueIsFifty() {
+        }
+    }
+
+    @Nested
+    @DisplayName("Backstage passes")
+    class BackstagePasses {
+
+        @Test
+        void qualityIncreasesWhenMoreThanTenDaysBeforeConcert() {
+        }
+
+        @Test
+        void qualityIncreasesTwoTimesWhenTenDaysOrLessBeforeConcert() {
+        }
+
+        @Test
+        void qualityIncreasesThreeTimesWhenFiveDaysOrLessBeforeConcert() {
+        }
+
+        @Test
+        void qualityIsZeroAfterConcert() {
+        }
+
+        @Test
+        void qualityMaximumValueIsFifty() {
         }
     }
 }
