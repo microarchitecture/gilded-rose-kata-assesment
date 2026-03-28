@@ -72,4 +72,21 @@ class GildedRoseTest {
         void qualityMaximumValueIsFifty() {
         }
     }
+
+    @Nested
+    @DisplayName("Sulfuras suite")
+    class Sulfuras {
+
+        @Test
+        void sellInNeverDecreases() {
+        }
+
+        @Test
+        void qualityNeverDecreases() {
+        }
+
+        @Test
+        void qualityMaximumValueIsEighty() {
+        }
+    }
 }
