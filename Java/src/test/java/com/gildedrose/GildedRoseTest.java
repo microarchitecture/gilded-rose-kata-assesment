@@ -1,11 +1,17 @@
 package com.gildedrose;
 
+import static com.gildedrose.GildedRoseTest.AgedBrie.AGED_BRIE_NAME;
+import static com.gildedrose.GildedRoseTest.BackstagePasses.BACKSTAGE_PASSES_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class GildedRoseTest {
 
@@ -70,7 +76,7 @@ class GildedRoseTest {
     @DisplayName("Aged Brie suite")
     class AgedBrie {
 
-        private static final String AGED_BRIE_NAME = "Aged Brie";
+        protected static final String AGED_BRIE_NAME = "Aged Brie";
 
         @Test
         void qualityIncreasesEachDayBeforeSellByDate() {
@@ -111,13 +117,33 @@ class GildedRoseTest {
             assertEquals(9, items[0].sellIn);
             assertEquals(50, items[0].quality);
         }
+
+        @ParameterizedTest(name = "At the end of the day, expected sellIn is {1}, and quality is {2}")
+        @MethodSource("com.gildedrose.GildedRoseTest#agedBrieCases")
+        void qualityAfterEachDayIs(Item[] backstagePassesItems, int expectedSellIn, int expectedQuality) {
+
+            new GildedRose(backstagePassesItems).updateQuality();
+
+            assertEquals(expectedSellIn, backstagePassesItems[0].sellIn);
+            assertEquals(expectedQuality, backstagePassesItems[0].quality);
+        }
+
+    }
+
+    private static Stream<Arguments> agedBrieCases() {
+        return Stream.of(
+            Arguments.of(new Item[] { new Item(AGED_BRIE_NAME, 3, 20) }, 2, 21),
+            Arguments.of(new Item[] { new Item(AGED_BRIE_NAME, 2, 21) }, 1, 22),
+            Arguments.of(new Item[] { new Item(AGED_BRIE_NAME, 1, 22) }, 0, 23),
+            Arguments.of(new Item[] { new Item(AGED_BRIE_NAME, 0, 23) }, -1, 25),
+            Arguments.of(new Item[] { new Item(AGED_BRIE_NAME, -1, 25) }, -2, 27));
     }
 
     @Nested
     @DisplayName("Backstage passes suite")
     class BackstagePasses {
 
-        private static final String BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
+        protected static final String BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
 
         @Test
         void qualityIncreasesWhenMoreThanTenDaysBeforeConcert() {
@@ -178,6 +204,33 @@ class GildedRoseTest {
             assertEquals(3, items[0].sellIn);
             assertEquals(50, items[0].quality);
         }
+
+        @ParameterizedTest(name = "At the end of the day, expected sellIn is {1}, and quality is {2}")
+        @MethodSource("com.gildedrose.GildedRoseTest#backstagePassesCases")
+        void qualityAfterEachDayIs(Item[] backstagePassesItems, int expectedSellIn, int expectedQuality) {
+
+            new GildedRose(backstagePassesItems).updateQuality();
+
+            assertEquals(expectedSellIn, backstagePassesItems[0].sellIn);
+            assertEquals(expectedQuality, backstagePassesItems[0].quality);
+        }
+    }
+
+    private static Stream<Arguments> backstagePassesCases() {
+        return Stream.of(
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 11, 24) }, 10, 25),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 10, 25) }, 9, 27),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 9, 27) }, 8, 29),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 8, 29) }, 7, 31),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 7, 31) }, 6, 33),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 6, 33) }, 5, 35),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 5, 35) }, 4, 38),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 4, 38) }, 3, 41),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 3, 41) }, 2, 44),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 2, 44) }, 1, 47),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 1, 47) }, 0, 50),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, 0, 50) }, -1, 0),
+            Arguments.of(new Item[] { new Item(BACKSTAGE_PASSES_NAME, -1, 0) }, -2, 0));
     }
 
     @Nested
