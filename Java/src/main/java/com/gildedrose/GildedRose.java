@@ -20,11 +20,7 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             if (!isAgedBrie(item) && !isBackstagePasses(item)) {
-                if (item.quality > QUALITY_MIN_VALUE) {
-                    if (!isSulfuras(item)) {
-                        item.quality = item.quality - QUALITY_NORMAL_DEGRADATION;
-                    }
-                }
+                decrementQualityByOneExceptSulfuras(item);
             } else {
                 if (item.quality < QUALITY_MAX_VALUE) {
                     item.quality = item.quality + QUALITY_NORMAL_DEGRADATION;
@@ -44,19 +40,11 @@ class GildedRose {
                     }
                 }
             }
-
-            if (!isSulfuras(item)) {
-                item.sellIn = item.sellIn - QUALITY_NORMAL_DEGRADATION;
-            }
-
+            decrementSellInExceptSulfuras(item);
             if (hasSellInDayPassed(item)) {
                 if (!isAgedBrie(item)) {
                     if (!isBackstagePasses(item)) {
-                        if (item.quality > QUALITY_MIN_VALUE) {
-                            if (!isSulfuras(item)) {
-                                item.quality = item.quality - QUALITY_NORMAL_DEGRADATION;
-                            }
-                        }
+                        decrementQualityByOneExceptSulfuras(item);
                     } else {
                         item.quality = item.quality - item.quality;
                     }
@@ -83,5 +71,17 @@ class GildedRose {
 
     private boolean hasSellInDayPassed(Item item) {
         return item.sellIn < 0;
+    }
+
+    private void decrementQualityByOneExceptSulfuras(Item item) {
+        if (item.quality > QUALITY_MIN_VALUE && !isSulfuras(item)) {
+            item.quality = item.quality - QUALITY_NORMAL_DEGRADATION;
+        }
+    }
+
+    private void decrementSellInExceptSulfuras(Item item) {
+        if (!isSulfuras(item)) {
+            item.sellIn = item.sellIn - QUALITY_NORMAL_DEGRADATION;
+        }
     }
 }
