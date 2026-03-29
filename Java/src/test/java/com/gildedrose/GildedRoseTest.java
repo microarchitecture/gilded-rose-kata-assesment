@@ -26,12 +26,22 @@ class GildedRoseTest {
         }
 
         @Test
-        void qualityDegradesTwoTimesFasterAfterSellByDate() {
+        void qualityDegradesTwoTimesFasterAtSellInDate() {
             Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, 0, 10) };
 
             new GildedRose(items).updateQuality();
 
             assertEquals(-1, items[0].sellIn);
+            assertEquals(8, items[0].quality);
+        }
+
+        @Test
+        void qualityDegradesTwoTimesFasterAfterSellByDate() {
+            Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, -1, 10) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-2, items[0].sellIn);
             assertEquals(8, items[0].quality);
         }
 
