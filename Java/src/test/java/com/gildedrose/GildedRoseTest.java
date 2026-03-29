@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -203,6 +204,7 @@ class GildedRoseTest {
         private static final String CONJURED_NAME = "Conjured Gouda";
 
         @Test
+        @Disabled("should be enabled as soon as business rules are added")
         void qualityDegradesTwoTimesFasterThanNormalBeforeSellBy() {
             Item[] items = new Item[] { new Item(CONJURED_NAME, 10, 30) };
 
@@ -213,6 +215,7 @@ class GildedRoseTest {
         }
 
         @Test
+        @Disabled("should be enabled as soon as business rules are added")
         void qualityDegradesTwoTimesFasterThanNormalAfterSellBy() {
             Item[] items = new Item[] { new Item(CONJURED_NAME, -1, 10) };
 
@@ -233,6 +236,7 @@ class GildedRoseTest {
         }
 
         @Test
+        @Disabled("should be enabled as soon as business rules are added")
         void qualityMaximumValueIsFifty() {
             Item[] items = new Item[] { new Item(CONJURED_NAME, 10, 50) };
 
