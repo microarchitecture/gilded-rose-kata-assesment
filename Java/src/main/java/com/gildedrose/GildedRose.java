@@ -22,11 +22,9 @@ class GildedRose {
             if (!isAgedBrie(item) && !isBackstagePasses(item)) {
                 decrementQualityByOneExceptSulfuras(item);
             } else {
-                if (item.quality < QUALITY_MAX_VALUE) {
-                    incrementNormalQuality(item);
-                    if (isBackstagePasses(item)) {
-                        incrementBackstagePassesQuality(item);
-                    }
+                incrementNormalQuality(item);
+                if (isBackstagePasses(item)) {
+                    incrementBackstagePassesQuality(item);
                 }
             }
             decrementSellInExceptSulfuras(item);
