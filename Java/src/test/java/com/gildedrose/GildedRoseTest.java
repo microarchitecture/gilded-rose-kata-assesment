@@ -50,6 +50,7 @@ class GildedRoseTest {
 
             new GildedRose(items).updateQuality();
 
+            assertEquals(4, items[0].sellIn);
             assertEquals(49, items[0].quality);
         }
     }
@@ -199,20 +200,46 @@ class GildedRoseTest {
     @DisplayName("Conjured item suite")
     class ConjuredItem {
 
+        private static final String CONJURED_NAME = "Conjured Gouda";
+
         @Test
         void qualityDegradesTwoTimesFasterThanNormalBeforeSellBy() {
+            Item[] items = new Item[] { new Item(CONJURED_NAME, 10, 30) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(9, items[0].sellIn);
+            assertEquals(28, items[0].quality);
         }
 
         @Test
         void qualityDegradesTwoTimesFasterThanNormalAfterSellBy() {
+            Item[] items = new Item[] { new Item(CONJURED_NAME, -1, 10) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-2, items[0].sellIn);
+            assertEquals(6, items[0].quality);
         }
 
         @Test
         void qualityMinimumValueIsZero() {
+            Item[] items = new Item[] { new Item(CONJURED_NAME, 0, 0) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-1, items[0].sellIn);
+            assertEquals(0, items[0].quality);
         }
 
         @Test
         void qualityMaximumValueIsFifty() {
+            Item[] items = new Item[] { new Item(CONJURED_NAME, 10, 50) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(9, items[0].sellIn);
+            assertEquals(48, items[0].quality);
         }
     }
 }
