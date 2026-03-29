@@ -1,5 +1,9 @@
 package com.gildedrose.strategy;
 
+import static com.gildedrose.ItemNames.AGED_BRIE_NAME;
+import static com.gildedrose.ItemNames.BACKSTAGE_PASSES_NAME;
+import static com.gildedrose.ItemNames.SULFURAS_NAME;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +12,6 @@ import java.util.Map;
  * Contains mapping between {@link com.gildedrose.Item#name} and {@link ItemUpdateStrategy} implementations.
  */
 public final class ItemUpdateStrategyRegistry {
-
-    private static final String AGED_BRIE_NAME = "Aged Brie";
-    private static final String BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
-    private static final String SULFURAS_NAME = "Sulfuras, Hand of Ragnaros";
 
     private final Map<String, ItemUpdateStrategy> strategiesByName;
     private final ItemUpdateStrategy defaultStrategy;
