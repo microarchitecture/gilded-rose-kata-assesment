@@ -150,12 +150,22 @@ class GildedRoseTest {
         }
 
         @Test
-        void qualityIsZeroAfterConcert() {
+        void qualityIsZeroAtTheConcertDay() {
             Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 0, 50) };
 
             new GildedRose(items).updateQuality();
 
             assertEquals(-1, items[0].sellIn);
+            assertEquals(0, items[0].quality);
+        }
+
+        @Test
+        void qualityIsZeroAfterTheConcert() {
+            Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, -1, 50) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-2, items[0].sellIn);
             assertEquals(0, items[0].quality);
         }
 
