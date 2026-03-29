@@ -102,27 +102,59 @@ class GildedRoseTest {
     }
 
     @Nested
-    @DisplayName("Backstage passes")
+    @DisplayName("Backstage passes suite")
     class BackstagePasses {
+
+        private static final String BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
 
         @Test
         void qualityIncreasesWhenMoreThanTenDaysBeforeConcert() {
+            Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 15, 10) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(14, items[0].sellIn);
+            assertEquals(11, items[0].quality);
         }
 
         @Test
-        void qualityIncreasesTwoTimesWhenTenDaysOrLessBeforeConcert() {
+        void qualityIncreasesTwoTimesFasterWhenTenDaysOrLessBeforeConcert() {
+            Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 10, 30) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(9, items[0].sellIn);
+            assertEquals(32, items[0].quality);
         }
 
         @Test
-        void qualityIncreasesThreeTimesWhenFiveDaysOrLessBeforeConcert() {
+        void qualityIncreasesThreeTimesFasterWhenFiveDaysOrLessBeforeConcert() {
+            Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 5, 40) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(4, items[0].sellIn);
+            assertEquals(43, items[0].quality);
         }
 
         @Test
         void qualityIsZeroAfterConcert() {
+            Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 0, 50) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-1, items[0].sellIn);
+            assertEquals(0, items[0].quality);
         }
 
         @Test
         void qualityMaximumValueIsFifty() {
+            Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 4, 50) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(3, items[0].sellIn);
+            assertEquals(50, items[0].quality);
         }
     }
 
