@@ -8,8 +8,8 @@ class GildedRose {
     private static final int QUALITY_MIN_VALUE = 0;
     private static final int QUALITY_MAX_VALUE = 50;
     private static final int QUALITY_DEFAULT_CHANGE = 1;
-    private static final int BACKSTAGE_PASSES_FIRST_MILESTONE = 10;
-    private static final int BACKSTAGE_PASSES_SECOND_MILESTONE = 5;
+    private static final int BACKSTAGE_PASSES_FIRST_QUALITY_THRESHOLD = 10;
+    private static final int BACKSTAGE_PASSES_SECOND_QUALITY_THRESHOLD = 5;
 
     Item[] items;
 
@@ -22,7 +22,6 @@ class GildedRose {
             if (isAgedBrie(item)) {
                 incrementQualityByDefault(item);
             } else if (isBackstagePasses(item)) {
-                incrementQualityByDefault(item);
                 incrementBackstagePassesQuality(item);
             } else {
                 decrementQualityByDefaultExceptSulfuras(item);
@@ -75,15 +74,12 @@ class GildedRose {
     }
 
     private void incrementBackstagePassesQuality(Item item) {
-        if (item.sellIn <= BACKSTAGE_PASSES_FIRST_MILESTONE) {
-            if (item.quality < QUALITY_MAX_VALUE) {
-                item.quality = item.quality + QUALITY_DEFAULT_CHANGE;
-            }
+        incrementQualityByDefault(item);
+        if (item.sellIn <= BACKSTAGE_PASSES_FIRST_QUALITY_THRESHOLD) {
+            incrementQualityByDefault(item);
         }
-        if (item.sellIn <= BACKSTAGE_PASSES_SECOND_MILESTONE) {
-            if (item.quality < QUALITY_MAX_VALUE) {
-                item.quality = item.quality + QUALITY_DEFAULT_CHANGE;
-            }
+        if (item.sellIn <= BACKSTAGE_PASSES_SECOND_QUALITY_THRESHOLD) {
+            incrementQualityByDefault(item);
         }
     }
 }
