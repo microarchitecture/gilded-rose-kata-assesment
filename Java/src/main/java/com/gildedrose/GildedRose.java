@@ -9,7 +9,7 @@ class GildedRose {
     private static final int QUALITY_MIN_VALUE = 0;
     private static final int BACKSTAGE_PASSES_FIRST_MILESTONE = 10;
     private static final int BACKSTAGE_PASSES_SECOND_MILESTONE = 5;
-    private static final int QUALITY_NORMAL_DEGRADATION = 1;
+    private static final int QUALITY_NORMAL_CHANGE = 1;
 
     Item[] items;
 
@@ -23,20 +23,9 @@ class GildedRose {
                 decrementQualityByOneExceptSulfuras(item);
             } else {
                 if (item.quality < QUALITY_MAX_VALUE) {
-                    item.quality = item.quality + QUALITY_NORMAL_DEGRADATION;
-
+                    incrementNormalQuality(item);
                     if (isBackstagePasses(item)) {
-                        if (item.sellIn <= BACKSTAGE_PASSES_FIRST_MILESTONE) {
-                            if (item.quality < QUALITY_MAX_VALUE) {
-                                item.quality = item.quality + QUALITY_NORMAL_DEGRADATION;
-                            }
-                        }
-
-                        if (item.sellIn <= BACKSTAGE_PASSES_SECOND_MILESTONE) {
-                            if (item.quality < QUALITY_MAX_VALUE) {
-                                item.quality = item.quality + QUALITY_NORMAL_DEGRADATION;
-                            }
-                        }
+                        incrementBackstagePassesQuality(item);
                     }
                 }
             }
@@ -49,9 +38,7 @@ class GildedRose {
                         item.quality = item.quality - item.quality;
                     }
                 } else {
-                    if (item.quality < QUALITY_MAX_VALUE) {
-                        item.quality = item.quality + QUALITY_NORMAL_DEGRADATION;
-                    }
+                    incrementNormalQuality(item);
                 }
             }
         }
@@ -75,13 +62,32 @@ class GildedRose {
 
     private void decrementQualityByOneExceptSulfuras(Item item) {
         if (item.quality > QUALITY_MIN_VALUE && !isSulfuras(item)) {
-            item.quality = item.quality - QUALITY_NORMAL_DEGRADATION;
+            item.quality = item.quality - QUALITY_NORMAL_CHANGE;
         }
     }
 
     private void decrementSellInExceptSulfuras(Item item) {
         if (!isSulfuras(item)) {
-            item.sellIn = item.sellIn - QUALITY_NORMAL_DEGRADATION;
+            item.sellIn = item.sellIn - QUALITY_NORMAL_CHANGE;
+        }
+    }
+
+    private void incrementNormalQuality(Item item) {
+        if (item.quality < QUALITY_MAX_VALUE) {
+            item.quality = item.quality + QUALITY_NORMAL_CHANGE;
+        }
+    }
+
+    private void incrementBackstagePassesQuality(Item item) {
+        if (item.sellIn <= BACKSTAGE_PASSES_FIRST_MILESTONE) {
+            if (item.quality < QUALITY_MAX_VALUE) {
+                item.quality = item.quality + QUALITY_NORMAL_CHANGE;
+            }
+        }
+        if (item.sellIn <= BACKSTAGE_PASSES_SECOND_MILESTONE) {
+            if (item.quality < QUALITY_MAX_VALUE) {
+                item.quality = item.quality + QUALITY_NORMAL_CHANGE;
+            }
         }
     }
 }
