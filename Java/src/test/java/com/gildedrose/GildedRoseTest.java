@@ -58,20 +58,46 @@ class GildedRoseTest {
     @DisplayName("Aged Brie suite")
     class AgedBrie {
 
+        private static final String AGED_BRIE_NAME = "Aged Brie";
+
         @Test
         void qualityIncreasesEachDayBeforeSellByDate() {
+            Item[] items = new Item[] { new Item(AGED_BRIE_NAME, 5, 10) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(4, items[0].sellIn);
+            assertEquals(11, items[0].quality);
         }
 
         @Test
-        void qualityIncreasesEachDayAfterSellByDate() {
+        void qualityIncreasesTwoTimesFasterAfterSellByDate() {
+            Item[] items = new Item[] { new Item(AGED_BRIE_NAME, 0, 30) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-1, items[0].sellIn);
+            assertEquals(32, items[0].quality);
         }
 
         @Test
         void qualityIsFiftyWhenStartingAtFortyNineAfterSellByDate() {
+            Item[] items = new Item[] { new Item(AGED_BRIE_NAME, -1, 49) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(-2, items[0].sellIn);
+            assertEquals(50, items[0].quality);
         }
 
         @Test
         void qualityMaximumValueIsFifty() {
+            Item[] items = new Item[] { new Item(AGED_BRIE_NAME, 10, 50) };
+
+            new GildedRose(items).updateQuality();
+
+            assertEquals(9, items[0].sellIn);
+            assertEquals(50, items[0].quality);
         }
     }
 
