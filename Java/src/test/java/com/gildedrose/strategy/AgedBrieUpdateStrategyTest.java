@@ -13,44 +13,46 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class AgedBrieUpdateStrategyTest {
 
+    private final AgedBrieUpdateStrategy updateStrategy = new AgedBrieUpdateStrategy(new ItemUpdateRules());
+
     @Test
     void qualityIncreasesEachDayBeforeSellByDate() {
-        Item[] items = new Item[] { new Item(AGED_BRIE_NAME, 5, 10) };
+        Item item = new Item(AGED_BRIE_NAME, 5, 10);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(4, items[0].sellIn);
-        assertEquals(11, items[0].quality);
+        assertEquals(4, item.sellIn);
+        assertEquals(11, item.quality);
     }
 
     @Test
     void qualityIncreasesTwoTimesFasterAfterSellByDate() {
-        Item[] items = new Item[] { new Item(AGED_BRIE_NAME, 0, 30) };
+        Item item = new Item(AGED_BRIE_NAME, 0, 30);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(-1, items[0].sellIn);
-        assertEquals(32, items[0].quality);
+        assertEquals(-1, item.sellIn);
+        assertEquals(32, item.quality);
     }
 
     @Test
     void qualityIsFiftyWhenStartingAtFortyNineAfterSellByDate() {
-        Item[] items = new Item[] { new Item(AGED_BRIE_NAME, -1, 49) };
+        Item item = new Item(AGED_BRIE_NAME, -1, 49);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(-2, items[0].sellIn);
-        assertEquals(50, items[0].quality);
+        assertEquals(-2, item.sellIn);
+        assertEquals(50, item.quality);
     }
 
     @Test
     void qualityMaximumValueIsFifty() {
-        Item[] items = new Item[] { new Item(AGED_BRIE_NAME, 10, 50) };
+        Item item = new Item(AGED_BRIE_NAME, 10, 50);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(9, items[0].sellIn);
-        assertEquals(50, items[0].quality);
+        assertEquals(9, item.sellIn);
+        assertEquals(50, item.quality);
     }
 
     @ParameterizedTest(name = "At the end of the day, expected sellIn is {1}, and quality is {2}")
