@@ -2,7 +2,6 @@ package com.gildedrose.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.gildedrose.GildedRose;
 import com.gildedrose.Item;
 import org.junit.jupiter.api.Test;
 
@@ -10,53 +9,55 @@ class NormalUpdateStrategyTest {
 
     private static final String NORMAL_ITEM_NAME = "Normal Item";
 
+    private final NormalUpdateStrategy updateStrategy = new NormalUpdateStrategy(new ItemUpdateRules());
+
     @Test
     void qualityDegradesByOneBeforeSellByDate() {
-        Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, 5, 10) };
+        Item item = new Item(NORMAL_ITEM_NAME, 5, 10);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(4, items[0].sellIn);
-        assertEquals(9, items[0].quality);
+        assertEquals(4, item.sellIn);
+        assertEquals(9, item.quality);
     }
 
     @Test
     void qualityDegradesTwoTimesFasterAtSellInDate() {
-        Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, 0, 10) };
+        Item item = new Item(NORMAL_ITEM_NAME, 0, 10);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(-1, items[0].sellIn);
-        assertEquals(8, items[0].quality);
+        assertEquals(-1, item.sellIn);
+        assertEquals(8, item.quality);
     }
 
     @Test
     void qualityDegradesTwoTimesFasterAfterSellByDate() {
-        Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, -1, 10) };
+        Item item = new Item(NORMAL_ITEM_NAME, -1, 10);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(-2, items[0].sellIn);
-        assertEquals(8, items[0].quality);
+        assertEquals(-2, item.sellIn);
+        assertEquals(8, item.quality);
     }
 
     @Test
     void qualityMinimumValueIsZero() {
-        Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, 5, 0) };
+        Item item = new Item(NORMAL_ITEM_NAME, 5, 0);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(4, items[0].sellIn);
-        assertEquals(0, items[0].quality);
+        assertEquals(4, item.sellIn);
+        assertEquals(0, item.quality);
     }
 
     @Test
     void qualityMaximumValueIsFifty() {
-        Item[] items = new Item[] { new Item(NORMAL_ITEM_NAME, 5, 50) };
+        Item item = new Item(NORMAL_ITEM_NAME, 5, 50);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(4, items[0].sellIn);
-        assertEquals(49, items[0].quality);
+        assertEquals(4, item.sellIn);
+        assertEquals(49, item.quality);
     }
 }

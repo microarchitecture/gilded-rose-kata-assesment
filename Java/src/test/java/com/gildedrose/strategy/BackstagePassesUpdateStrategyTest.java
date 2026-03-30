@@ -13,64 +13,67 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class BackstagePassesUpdateStrategyTest {
 
+    private final BackstagePassesUpdateStrategy updateStrategy = new BackstagePassesUpdateStrategy(
+        new ItemUpdateRules());
+
     @Test
     void qualityIncreasesWhenMoreThanTenDaysBeforeConcert() {
-        Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 15, 10) };
+        Item item = new Item(BACKSTAGE_PASSES_NAME, 15, 10);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(14, items[0].sellIn);
-        assertEquals(11, items[0].quality);
+        assertEquals(14, item.sellIn);
+        assertEquals(11, item.quality);
     }
 
     @Test
     void qualityIncreasesTwoTimesFasterWhenTenDaysOrLessBeforeConcert() {
-        Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 10, 30) };
+        Item item = new Item(BACKSTAGE_PASSES_NAME, 10, 30);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(9, items[0].sellIn);
-        assertEquals(32, items[0].quality);
+        assertEquals(9, item.sellIn);
+        assertEquals(32, item.quality);
     }
 
     @Test
     void qualityIncreasesThreeTimesFasterWhenFiveDaysOrLessBeforeConcert() {
-        Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 5, 40) };
+        Item item = new Item(BACKSTAGE_PASSES_NAME, 5, 40);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(4, items[0].sellIn);
-        assertEquals(43, items[0].quality);
+        assertEquals(4, item.sellIn);
+        assertEquals(43, item.quality);
     }
 
     @Test
     void qualityIsZeroAtTheConcertDay() {
-        Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 0, 50) };
+        Item item = new Item(BACKSTAGE_PASSES_NAME, 0, 50);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(-1, items[0].sellIn);
-        assertEquals(0, items[0].quality);
+        assertEquals(-1, item.sellIn);
+        assertEquals(0, item.quality);
     }
 
     @Test
     void qualityIsZeroAfterTheConcert() {
-        Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, -1, 50) };
+        Item item = new Item(BACKSTAGE_PASSES_NAME, -1, 50);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(-2, items[0].sellIn);
-        assertEquals(0, items[0].quality);
+        assertEquals(-2, item.sellIn);
+        assertEquals(0, item.quality);
     }
 
     @Test
     void qualityMaximumValueIsFifty() {
-        Item[] items = new Item[] { new Item(BACKSTAGE_PASSES_NAME, 4, 50) };
+        Item item = new Item(BACKSTAGE_PASSES_NAME, 4, 50);
 
-        new GildedRose(items).updateQuality();
+        updateStrategy.update(item);
 
-        assertEquals(3, items[0].sellIn);
-        assertEquals(50, items[0].quality);
+        assertEquals(3, item.sellIn);
+        assertEquals(50, item.quality);
     }
 
     @ParameterizedTest(name = "At the end of the day, expected sellIn is {1}, and quality is {2}")
