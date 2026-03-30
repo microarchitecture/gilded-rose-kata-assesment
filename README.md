@@ -1,12 +1,12 @@
 ## Technical assessment
 
-The assessment solution is based on the original `Gilded Rose Refactoring Kata` and was cloned from https://github.com/emilybache/GildedRose-Refactoring-Kata. As the submission is Java-only, non-Java content was removed on the development branch. The original code base and README.md are on the `main` branch.
+The assessment solution is based on the original `Gilded Rose Refactoring Kata` and was cloned from https://github.com/emilybache/GildedRose-Refactoring-Kata. As the submission is Java-only, non-Java content was removed from the `develop` branch. The original code base and README.md are on the `main` branch (just in case it is required as reference for review).
 
 ## How to use the repository
 
 #### 1. Structure
 
-The assessment is organized in three main steps. Please read them for better understanding approach for implementation.
+The assessment documentation is organized in three parts. Please read documents for better understanding of the implementation.
 - [Problem statement](docs/problemStatement.md). Lists problems and flaws with the initial solution on different abstract levels.
 - [Solution designs](docs/solutionDesigns.md). Describes possible solutions, explain their pros and cons for solving problems defined in the [Problem statement](docs/problemStatement.md). Explains chosen approach. 
 - [Execution plan](docs/executionPlan.md). Execution plan of the refactoring.
