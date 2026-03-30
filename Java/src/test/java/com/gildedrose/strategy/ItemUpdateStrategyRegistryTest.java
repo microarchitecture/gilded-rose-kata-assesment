@@ -1,5 +1,9 @@
 package com.gildedrose.strategy;
 
+import static com.gildedrose.ItemNames.AGED_BRIE_NAME;
+import static com.gildedrose.ItemNames.BACKSTAGE_PASSES_NAME;
+import static com.gildedrose.ItemNames.CONJURED_NAME;
+import static com.gildedrose.ItemNames.SULFURAS_NAME;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
@@ -8,10 +12,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class ItemUpdateStrategyRegistryTest {
-
-    private static final String AGED_BRIE_NAME = "Aged Brie";
-    private static final String BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
-    private static final String SULFURAS_NAME = "Sulfuras, Hand of Ragnaros";
 
     private final ItemUpdateStrategyRegistry registry = new ItemUpdateStrategyRegistry();
 
@@ -29,6 +29,7 @@ class ItemUpdateStrategyRegistryTest {
             Arguments.of(null, NormalUpdateStrategy.class),
             Arguments.of(AGED_BRIE_NAME, AgedBrieUpdateStrategy.class),
             Arguments.of(BACKSTAGE_PASSES_NAME, BackstagePassesUpdateStrategy.class),
-            Arguments.of(SULFURAS_NAME, SulfurasUpdateStrategy.class));
+            Arguments.of(SULFURAS_NAME, SulfurasUpdateStrategy.class),
+            Arguments.of(CONJURED_NAME, ConjuredUpdateStrategy.class));
     }
 }

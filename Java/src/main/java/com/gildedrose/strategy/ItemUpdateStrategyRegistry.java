@@ -2,6 +2,7 @@ package com.gildedrose.strategy;
 
 import static com.gildedrose.ItemNames.AGED_BRIE_NAME;
 import static com.gildedrose.ItemNames.BACKSTAGE_PASSES_NAME;
+import static com.gildedrose.ItemNames.CONJURED_NAME;
 import static com.gildedrose.ItemNames.SULFURAS_NAME;
 
 import java.util.Collections;
@@ -24,6 +25,7 @@ public final class ItemUpdateStrategyRegistry {
         updateStrategies.put(AGED_BRIE_NAME, new AgedBrieUpdateStrategy(itemUpdateRules));
         updateStrategies.put(BACKSTAGE_PASSES_NAME, new BackstagePassesUpdateStrategy(itemUpdateRules));
         updateStrategies.put(SULFURAS_NAME, new SulfurasUpdateStrategy());
+        updateStrategies.put(CONJURED_NAME, new ConjuredUpdateStrategy(itemUpdateRules));
         this.strategiesByName = Collections.unmodifiableMap(updateStrategies);
     }
 
