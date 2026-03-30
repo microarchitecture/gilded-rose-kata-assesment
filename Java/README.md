@@ -28,3 +28,9 @@ The other relies on your CLASSPATH being set correctly in [environment.gr](../te
 
     executable:com.gildedrose.TexttestFixture
     interpreter:java
+
+## Run unit test with Maven from the /Java
+
+```
+mvn clean test
+```
