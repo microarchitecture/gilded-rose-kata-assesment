@@ -17,11 +17,12 @@ public final class ItemUpdateStrategyRegistry {
     private final ItemUpdateStrategy defaultStrategy;
 
     public ItemUpdateStrategyRegistry() {
+        ItemUpdateRules itemUpdateRules = new ItemUpdateRules();
         Map<String, ItemUpdateStrategy> updateStrategies = new HashMap<>();
-        defaultStrategy = new NormalUpdateStrategy();
+        defaultStrategy = new NormalUpdateStrategy(itemUpdateRules);
         updateStrategies.put(null, defaultStrategy);
-        updateStrategies.put(AGED_BRIE_NAME, new AgedBrieUpdateStrategy());
-        updateStrategies.put(BACKSTAGE_PASSES_NAME, new BackstagePassesUpdateStrategy());
+        updateStrategies.put(AGED_BRIE_NAME, new AgedBrieUpdateStrategy(itemUpdateRules));
+        updateStrategies.put(BACKSTAGE_PASSES_NAME, new BackstagePassesUpdateStrategy(itemUpdateRules));
         updateStrategies.put(SULFURAS_NAME, new SulfurasUpdateStrategy());
         this.strategiesByName = Collections.unmodifiableMap(updateStrategies);
     }
