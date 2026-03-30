@@ -6,10 +6,10 @@ The assessment solution is based on the original `Gilded Rose Refactoring Kata` 
 
 #### 1. Structure
 
-The assessment is organized in three main steps:
-- [Problem statement](docs/problemStatement.md)
-- [Solution designs](docs/solutionDesigns.md)
-- [Execution plan of the refactoring](docs/executionPlan.md)
+The assessment is organized in three main steps. Please read them for better understanding approach for implementation.
+- [Problem statement](docs/problemStatement.md). Lists problems and flaws with the initial solution on different abstract levels.
+- [Solution designs](docs/solutionDesigns.md). Describes possible solutions, explain their pros and cons for solving problems defined in the [Problem statement](docs/problemStatement.md). Explains chosen approach. 
+- [Execution plan](docs/executionPlan.md). Execution plan of the refactoring.
 
 Implementation and unit tests live under `Java/src/main/java` and `Java/src/test/java` respectively.
 
@@ -25,3 +25,9 @@ Commits follow the [Conventional Commits](https://www.conventionalcommits.org/en
 #### 3. Testing
 
 How to run tests is described in the [Java README](Java/README.md).
+
+#### 4. Misc
+
+- The implementation follows [GildedRoseRequirements.md](GildedRoseRequirements.md) only. Nothing beyond the spec was added (for example: validating `Item#quality` up front, changing access modifiers on `Item`, or adding getters/setters).
+- No new dependencies were added. The requirements do not mentioned anything beyond the JDK. For instance, framework such as Spring Boot could reduce boilerplate but is out of scope for this task.
+- Refactoring was done in short-lived feature branches merged into `develop`. Those branches remain in the repository. As noted above, the branch to review is `develop`.
